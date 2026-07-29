@@ -215,11 +215,11 @@
   /* the stamp */
   .stamp{
     position:absolute;
-    top: 42%;
-    right: 18px;
-    width: 260px;
+    top: 46%;
+    right: -10px;
+    width: 210px;
     transform: translateY(-50%) rotate(-16deg) scale(1);
-    opacity: 1;
+    opacity: 0.92;
     z-index: 2;
     pointer-events:none;
     filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
@@ -229,8 +229,8 @@
 
   @keyframes stampIn{
     0%{ transform: translateY(-50%) rotate(-16deg) scale(2.6); opacity:0; }
-    60%{ opacity: 1; }
-    100%{ transform: translateY(-50%) rotate(-16deg) scale(1); opacity:1; }
+    60%{ opacity: 0.95; }
+    100%{ transform: translateY(-50%) rotate(-16deg) scale(1); opacity:0.92; }
   }
 
   @media (max-width: 520px){
@@ -238,7 +238,7 @@
     .letterhead{ flex-direction:column; align-items:flex-start; gap:10px; }
     .letterhead .memo-tag{ text-align:left; }
     .kpi-grid{ grid-template-columns: 1fr 1fr; }
-    .stamp{ width: 190px; right: 4px; top: 26%; }
+    .stamp{ width: 150px; right: 6px; top: 30%; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -300,18 +300,19 @@
           <filter id="grain">
             <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
             <feColorMatrix in="noise" type="matrix"
-              values="0 0 0 0 1
-                      0 0 0 0 1
-                      0 0 0 0 1
-                      0 0 0 0.97 0"/>
-            <feComposite operator="in" in2="SourceGraphic" result="grainedShape"/>
+              values="0 0 0 0 0
+                      0 0 0 0 0
+                      0 0 0 0 0
+                      0 0 0 0.97 0"
+              result="grain"/>
+            <feComposite operator="in" in="SourceGraphic" in2="grain"/>
           </filter>
         </defs>
         <g filter="url(#grain)">
-          <circle cx="110" cy="110" r="98" fill="none" stroke="#8A6238" stroke-width="9"/>
-          <circle cx="110" cy="110" r="80" fill="none" stroke="#8A6238" stroke-width="4"/>
-          <text x="110" y="103" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="36" fill="#8A6238" letter-spacing="2">RETIRED</text>
-          <text x="110" y="131" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#8A6238" letter-spacing="4">EFFECTIVE NOW</text>
+          <circle cx="110" cy="110" r="98" fill="none" stroke="#B23A2E" stroke-width="7"/>
+          <circle cx="110" cy="110" r="82" fill="none" stroke="#B23A2E" stroke-width="3"/>
+          <text x="110" y="102" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="34" fill="#B23A2E" letter-spacing="2">RETIRED</text>
+          <text x="110" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#B23A2E" letter-spacing="4">EFFECTIVE NOW</text>
         </g>
       </svg>
     </div>
