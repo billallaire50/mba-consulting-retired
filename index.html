@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBA Consulting Corporation — Retired</title>
+<style>
+  :root{
+    --paper: #ECE1C2;
+    --paper-edge: #DCCB9E;
+    --ink: #2E3A46;
+    --ink-soft: #5B6672;
+    --rule: #A9B7BE;
+    --stamp: #B23A2E;
+    --stamp-dark: #8C2C22;
+    --tape: rgba(230, 220, 190, 0.55);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: #C9BE9F;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(0,0,0,0.06), transparent 40%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--ink);
+    padding: 32px 16px;
+  }
+
+  .memo{
+    position:relative;
+    width:100%;
+    max-width:680px;
+    background: var(--paper);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.4) inset,
+      0 20px 40px rgba(0,0,0,0.25),
+      0 2px 6px rgba(0,0,0,0.15);
+    padding: 44px 40px 40px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  /* aged paper grain */
+  .memo::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    mix-blend-mode: multiply;
+  }
+  .memo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse at 88% 8%, rgba(120,90,40,0.10), transparent 22%),
+      radial-gradient(ellipse at 6% 94%, rgba(120,90,40,0.08), transparent 25%);
+    pointer-events:none;
+  }
+
+  /* tape corners */
+  .tape{
+    position:absolute;
+    width:90px; height:34px;
+    background: var(--tape);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.05);
+    opacity:0.85;
+  }
+  .tape.tl{ top:-14px; left:24px; transform: rotate(-8deg); }
+  .tape.tr{ top:-14px; right:24px; transform: rotate(7deg); }
+
+  .letterhead{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+    position:relative;
+    z-index:1;
+  }
+  .letterhead img{
+    height: 46px;
+    display:block;
+  }
+  .letterhead .memo-tag{
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    text-align:right;
+    line-height:1.6;
+  }
+
+  .field-row{
+    display:grid;
+    grid-template-columns: 90px 1fr;
+    gap: 4px 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 3px;
+    position:relative;
+    z-index:1;
+  }
+  .field-row b{ color: var(--ink); }
+
+  .rule{
+    border:none;
+    border-top: 1px dashed var(--rule);
+    margin: 16px 0 20px;
+  }
+
+  h1.headline{
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    margin: 6px 0 18px;
+    color: var(--ink);
+    position:relative;
+    z-index:1;
+  }
+
+  p{
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 0 0 14px;
+    position:relative;
+    z-index:1;
+  }
+
+  .exec-box{
+    border: 1px solid var(--ink);
+    padding: 14px 16px;
+    margin: 20px 0;
+    background: rgba(255,255,255,0.25);
+    position:relative;
+    z-index:1;
+  }
+  .exec-box .label{
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .exec-box ul{
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .kpi-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 22px 0;
+    position:relative;
+    z-index:1;
+  }
+  .kpi{
+    text-align:center;
+    padding: 12px 6px;
+    border: 1px solid var(--rule);
+  }
+  .kpi .num{
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight:bold;
+    color: var(--stamp-dark);
+    display:block;
+  }
+  .kpi .lbl{
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing:0.06em;
+    text-transform: uppercase;
+    display:block;
+    margin-top: 4px;
+  }
+
+  .sign-off{
+    margin-top: 26px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 15px;
+    position:relative;
+    z-index:1;
+  }
+
+  footer{
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 2px solid var(--ink);
+    font-size: 11px;
+    color: var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:6px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* the stamp */
+  .stamp{
+    position:absolute;
+    top: 46%;
+    right: -10px;
+    width: 210px;
+    transform: translateY(-50%) rotate(-16deg) scale(1);
+    opacity: 0.92;
+    z-index: 2;
+    pointer-events:none;
+    animation: stampIn 0.6s cubic-bezier(.2,1.6,.4,1) 0.15s both;
+  }
+  .stamp svg{ width:100%; height:auto; display:block; }
+
+  @keyframes stampIn{
+    0%{ transform: translateY(-50%) rotate(-16deg) scale(2.6); opacity:0; }
+    60%{ opacity: 0.95; }
+    100%{ transform: translateY(-50%) rotate(-16deg) scale(1); opacity:0.92; }
+  }
+
+  @media (max-width: 520px){
+    .memo{ padding: 34px 22px 28px; }
+    .letterhead{ flex-direction:column; align-items:flex-start; gap:10px; }
+    .letterhead .memo-tag{ text-align:left; }
+    .kpi-grid{ grid-template-columns: 1fr 1fr; }
+    .stamp{ width: 150px; right: 6px; top: 30%; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .stamp{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+  <main class="memo">
+    <div class="tape tl"></div>
+    <div class="tape tr"></div>
+
+    <div class="letterhead">
+      <img src="mbalogo.png" alt="MBA Consulting Corporation logo">
+      <div class="memo-tag">INTER&#8209;OFFICE MEMO<br>FORM 12&#8209;B (FINAL)</div>
+    </div>
+
+    <div class="field-row"><span>TO:</span><span><b>Anyone still emailing us</b></span></div>
+    <div class="field-row"><span>FROM:</span><span><b>The Partners (all four of us)</b></span></div>
+    <div class="field-row"><span>RE:</span><span><b>Voluntary, permanent, unpaid sabbatical</b></span></div>
+
+    <hr class="rule">
+
+    <h1 class="headline">MBA Consulting Corporation has officially retired.</h1>
+
+    <p>After years of leveraging synergies, circling back, and putting pins in things, we have completed a full 360&deg; strategic review of our own careers and identified one clear action item: <b>stop.</b></p>
+
+    <p>This decision was reached unanimously, in a meeting that could absolutely have been an email, and then followed up with an email anyway, out of respect for tradition.</p>
+
+    <div class="exec-box">
+      <div class="label">Executive Summary</div>
+      <ul>
+        <li>Mission: accomplished, allegedly</li>
+        <li>Deliverables: delivered, mostly on time</li>
+        <li>Blockers: none remaining &mdash; we removed ourselves</li>
+        <li>Next steps: golf, naps, occasionally both at once</li>
+      </ul>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi"><span class="num">0</span><span class="lbl">Meetings Booked</span></div>
+      <div class="kpi"><span class="num">&infin;</span><span class="lbl">Naps Taken</span></div>
+      <div class="kpi"><span class="num">3</span><span class="lbl">Golf Balls Lost</span></div>
+    </div>
+
+    <p>Please direct all future synergy, alignment, and bandwidth to someone with bandwidth. We regret to inform you that our five&#8209;year plan is now just &ldquo;Tuesday.&rdquo;</p>
+
+    <p class="sign-off">Thank you for 30 wonderful quarters. It's been a real pleasure pivoting with you.</p>
+
+    <footer>
+      <span>MBA Consulting Corp. &mdash; Est. a while ago, Closed for good</span>
+      <span>This memo will not be A/B tested.</span>
+    </footer>
+
+    <div class="stamp" aria-hidden="true">
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
+            <feColorMatrix in="noise" type="matrix"
+              values="0 0 0 0 1
+                      0 0 0 0 1
+                      0 0 0 0 1
+                      0 0 0 0.9 0"/>
+            <feComposite operator="in" in2="SourceGraphic" result="grainedShape"/>
+          </filter>
+        </defs>
+        <g filter="url(#grain)">
+          <circle cx="110" cy="110" r="98" fill="none" stroke="#B23A2E" stroke-width="7"/>
+          <circle cx="110" cy="110" r="82" fill="none" stroke="#B23A2E" stroke-width="3"/>
+          <text x="110" y="102" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="34" fill="#B23A2E" letter-spacing="2">RETIRED</text>
+          <text x="110" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#B23A2E" letter-spacing="4">EFFECTIVE NOW</text>
+        </g>
+      </svg>
+    </div>
+  </main>
+
+</body>
+</html>
